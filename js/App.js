@@ -26,18 +26,25 @@ var App = React.createClass({
 });
 
 var News = React.createClass({
+	propTypes: {
+		data: React.PropTypes.array.isRequired
+	},
 	render: function () {
 		var data = this.props.data;
-		var newsTemplate = data.map(function(item, index) {
-			return (
-				<div key={index}>
-					<p className="news__author">{item.author}:</p>
-					<p className="news__text">{item.text}</p>
-				</div>
-			);
-		});
-		return (<div className="news">{newsTemplate}</div>
-		);
+		if (data.length > 0) {
+			var newsTemplate = data.map(function(item, index) {
+				return (
+					<div key={index}>
+						<p className="news__author">{item.author}:</p>
+						<p className="news__text">{item.text}</p>
+					</div>
+				);
+			});
+		} else {
+			return (<p>There is no news</p>);
+		}
+		console.log(newsTemplate);
+		return (<div className="news">{newsTemplate}</div>);
 	}
 });
 
