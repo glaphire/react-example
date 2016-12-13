@@ -70,23 +70,16 @@ var Article = React.createClass({
 			visible: false
 		};
 	},
-	readmoreClick: function(e) {
-		e.preventDefault();
-		this.setState({visible:true}, function(){
-			alert("State was changed");
-		});
-	},
 	render: function() {
 	var author = this.props.data.author,
 	text = this.props.data.text,
-	bigText = this.props.data.bigText,
-	visible = this.state.visible;
+	bigText = this.props.data.bigText;
 	return (
 		<div className='article'>
 			<p className='news__author'>{author}:</p>
 			<p className='news__text'>{text}</p>
-			<a href="#" onClick={this.readmoreClick} className={'news__readmore ' + (visible ? 'none' : '')}>Подробнее</a>
-			<p className={'news__big-text ' + (visible ? '' : 'none')}>{bigText}</p>
+			<a href="#" className='news__readmore '>Подробнее</a>
+			<p className='news__big-text'>{bigText}</p>
 		</div>
 		)
 	}
