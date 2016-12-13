@@ -107,23 +107,20 @@ var Article = React.createClass({
 });
 
 var TestInput = React.createClass({
-	getInitialState: function(){
-		return { myValue: ''};
-	},
-	onChangeHandler: function(e){
-		this.setState({myValue: e.target.value})
-	},
+
+
 	onClickInputAlert: function(e)
 	{
-		alert(this.state.myValue);
+		console.log(this.refs);
+		alert(ReactDOM.findDOMNode(this.refs.myTestInput).value);
 	},
 	render: function(){
 		return (
 			<div className='test-input'>
 			<input
-				value={this.state.myValue}
-				onChange={this.onChangeHandler}
+				defaultValue=''
 				placeholder='please enter value'
+				ref='myTestInput'
 			/>
 			< button  onClick={this.onClickInputAlert}>Alert input value< /button >
 			</div>
