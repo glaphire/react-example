@@ -22,7 +22,7 @@ var App = React.createClass({
 		return (
 			<div className="app"> Hello everyone, I*m App Component. I can render News.
 				<h3>News:</h3>
-				<TestInput />
+				<Add />
 				<News data={my_news} />
 				<Comments />
 			</div>
@@ -106,29 +106,65 @@ var Article = React.createClass({
 	}
 });
 
-var TestInput = React.createClass({
-
-
-	onClickInputAlert: function(e)
-	{
-		console.log(this.refs);
-		alert(ReactDOM.findDOMNode(this.refs.myTestInput).value);
+var Add = React.createClass({
+	componentDidMount: function() {
+		ReactDOM.findDOMNode(this.refs.author).focus();
 	},
-	render: function(){
+	onBtnClickHandler: function(e) {
+		e.preventDefault();
+	},
+	getInitialState: function(){
+		return {
+			btnIsDisabled: true
+		};
+	},
+	componentDidMount: function() {
+		ReactDOM.findDOMNode(this.refs.author).focus();
+	},
+	onBtnClickHandler: function(e) {
+		e.preventDefault();
+	},
+	onCheckRuleClick: function(e) {
+		this.setState({btnIsDisabled: !this.state.btnIsDisabled}); //устанавливаем значение в state
+	},
+	render: function() {
 		return (
-			<div className='test-input'>
-			<input
-				defaultValue=''
-				placeholder='please enter value'
-				ref='myTestInput'
-			/>
-			< button  onClick={this.onClickInputAlert}>Alert input value< /button >
-			</div>
-				);
+			<form className="add cf">
+				<input type="text"
+					   className="add_author"
+					   defaultValue=""
+					   placeholder="Your name"
+					   ref="author"/>
+				<textarea
+					className="add__text"
+					defaultValue=""
+					placeholder="News content"
+					ref="text"
+					cols="30"
+					rows="10">
+				</textarea>
+				<label className="add__checkrule">
+					<input
+						type="checkbox"
+						defaultChecked={false}
+						ref="checkrule"
+						onChange={this.onCheckRuleClick}
+					/> I agree with rules
+				</label>
+				<button
+					className="add__btn"
+					onClick={this.onBtnClickHandler}
+					ref="alert_button"
+					disabled={this.state.btnIsDisabled}
+				>
+					Show alert message
+				</button>
+			</form>
+		);
 	}
 });
 
 ReactDOM.render(
-<App />,
-document.getElementById('root')
+	<App />,
+	document.getElementById('root')
 );
