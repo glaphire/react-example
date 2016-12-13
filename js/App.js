@@ -32,7 +32,12 @@ var News = React.createClass({
 	propTypes: {
 		data: React.PropTypes.array.isRequired
 	},
-	
+	getInitialState: function() {
+		return {counter:0};
+	},
+	onTotalNewsClick: function(){
+		this.setState({counter: ++this.state.counter});
+	},
 	render: function () {
 		var data = this.props.data;
 		if (data.length > 0) {
@@ -46,8 +51,16 @@ var News = React.createClass({
 		} else {
 			return (<p>There is no news</p>);
 		}
-		console.log(newsTemplate);
-		return (<div className="news">{newsTemplate}</div>);
+		return (
+			<div className='news'>{newsTemplate}
+			<strong
+				className={'news__count ' + (data.length > 0 ? '' : 'none')}
+				onClick={this.onTotalNewsClick}
+			>
+			News count: {data.length}</strong>
+				<strong>Clicks: {this.state.counter}</strong>
+			</div>
+		);
 	}
 });
 
@@ -67,7 +80,8 @@ var Article = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			visible: false
+			visible: false,
+			counter: 0
 		};
 	},
 	readmoreClick: function(e){
