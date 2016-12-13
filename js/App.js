@@ -21,6 +21,8 @@ var App = React.createClass({
 	render: function () {
 		return (
 			<div className="app"> Hello everyone, I*m App Component. I can render News.
+				<h3>News:</h3>
+				<TestInput />
 				<News data={my_news} />
 				<Comments />
 			</div>
@@ -101,6 +103,25 @@ var Article = React.createClass({
 			<p className={'news__big-text ' + (visible ? '' : 'none')}>{bigText}</p>
 		</div>
 		)
+	}
+});
+
+var TestInput = React.createClass({
+	getInitialState: function(){
+		return { myValue: ''};
+	},
+	onChangeHandler: function(e){
+		this.setState({myValue: e.target.value})
+	},
+	render: function(){
+		return (
+			<input
+				className='test-input'
+				value={this.state.myValue}
+				onChange={this.onChangeHandler}
+				placeholder='please enter value'
+			/>
+		);
 	}
 });
 
